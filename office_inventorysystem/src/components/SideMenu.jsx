@@ -30,39 +30,39 @@ export default function SideMenu() {
         onClick={(item)=>{
           navigate(item.key)
         }}
-        defaultSelectedKeys={['dashboard-1']}
+        defaultSelectedKeys={['Dashboard-Admin']}
         mode="inline"
         inlineCollapsed={collapsed}
         items={[
           {
             label: 'Dashboard',
             icon: <RxDashboard />,
-            key: '/dashboard'
+            key: '/admin/dashboard'
           },
           {
             label: 'Check Inventory',
             icon: <BsFillCartCheckFill />,
-            key: '/inventory'
+            key: '/admin/inventory'
           },
           {
             label: 'Employee Management',
             icon: <MdManageAccounts style={{fontSize: 17}} />,
-            key: '/usermanagement/'
+            key: '/admin/usermanagement/'
           },
           {
             label: 'Reports',
             icon: <MdOutlineAddchart style={{fontSize: 15}} />,
-            key: '/reports'
+            key: '/admin/reports'
           },
           {
             label: 'Database',
             icon: <RiDatabase2Fill />,
-            key: '/database'
+            key: '/admin/database'
           },
           {
             label: 'Settings',
             icon: <FiSettings />,
-            key: '/settings'
+            key: '/admin/settings'
           },
         ]}
       />

@@ -7,10 +7,6 @@
 - Run the following commands in a **Terminal** to start the server for the Website
 
 ``` shell
-cd Office_InventorySystem
-```
-
-``` shell
 pip install -r requirements.txt
 ```
 

@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from flask_cors import CORS, cross_origin
 from flask.helpers import send_from_directory
 from bson import ObjectId
-from datetime import datetime
+import datetime
 
 app = Flask(__name__, static_folder='office_inventorysystem/build', static_url_path='')
 
@@ -28,21 +28,27 @@ def signin():
         staffId = data.get('staffId')
         password = data.get('password')
         
+        # Check if user is an admin
         user = db['Users'].find_one({'staffId': staffId, 'password': password})
         
         if user:
             db['Users'].update_one(
                 {'_id': user['_id']},
-                {'$set': {'last_login': datetime.utcnow()}}
+                {'$set': {'last_login': datetime.datetime.now(datetime.UTC)}}
             )
-
             db['UserLoginTimes'].insert_one({
                 'userId': user['_id'],
-                'loginTime': datetime.utcnow()
+                'loginTime': datetime.datetime.now(datetime.UTC)
             })
-            return jsonify({'success': True, 'message': 'Login successful', 'userId': str(user['_id'])})
-        else:
-            return jsonify({'success': False, 'message': 'Invalid credentials'})        
+            return jsonify({'success': True, 'message': 'Login successful', 'userId': str(user['_id']), 'dashboard': '/admin/dashboard'})
+        
+        # Check if user is an employee
+        employee = db['Employees'].find_one({'emplID': staffId, 'password': password})
+        
+        if employee:
+            return jsonify({'success': True, 'message': 'Login successful', 'userId': str(employee['_id']), 'dashboard': '/employee/dashboard'})
+        
+        return jsonify({'success': False, 'message': 'Invalid credentials'})
         
 @app.route('/api/user_activity', methods=['GET'])
 @cross_origin()
@@ -65,6 +71,21 @@ def get_user(id):
         return jsonify({'name': user['name'], 'staffId': user['staffId'], 'position': user['position'], 'email': user['email'], 'password': user['password']})
     else:
         return jsonify({'error': 'User not found'})
+    
+@app.route('/employee/<id>', methods=['GET'])
+@cross_origin()
+def get_employee(id):
+    employee = db['Employees'].find_one({'_id': ObjectId(id)})
+    if employee:
+        return jsonify({
+            'emplName': employee['emplName'],
+            'email': employee['email'],
+            'emplID': employee['emplID'],
+            'contact': employee['contact']
+        })
+    else:
+        return jsonify({'error': 'Employee not found'})
+
     
 @app.route('/update_password', methods=['POST'])
 @cross_origin()

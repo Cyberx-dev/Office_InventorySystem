@@ -9,20 +9,20 @@ const SignIn = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+    
         const form = event.target;
-
+    
         const formData = {
             staffId: event.target.staffId.value,
-            password: event.target.password.value,
+            password: event.target.password.value
         };
-
+    
         fetch('http://localhost:5000/signin', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(formData)
         })
         .then(response => {
             if (!response.ok) {
@@ -33,7 +33,7 @@ const SignIn = () => {
         .then(data => {
             if (data.success) {
                 localStorage.setItem('userId', data.userId);
-                navigate('/dashboard', { replace: true });
+                navigate(data.dashboard, { replace: true });
             } else {
                 alert(`Login failed: ${data.message}`);
                 form.reset();
@@ -44,7 +44,7 @@ const SignIn = () => {
             form.reset();
         });
     };
-
+    
     return (
         <div className='container'>
             <div className='header'>
