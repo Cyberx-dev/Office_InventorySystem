@@ -13,9 +13,9 @@ h1.pageTitle {
 }
 
 .table-header {
-    background-color: #1264d2;
-    color: white;
-    padding: 10px;
+    background-color: #ffffff;
+    padding: 0.5px;
+    color: black;
     text-align: center;
     width: 100%;
     font-size: 24px;
@@ -35,35 +35,35 @@ h1.pageTitle {
     font-family: 'Montserrat, sans-serif';
 }
 
-.reports-table thead tr {
+
+.reports-table .ant-table-thead > tr > th {
     background-color: #1264d2;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
+    padding: 12px 15px;
 }
 
-.reports-table th,
-.reports-table td {
+.reports-table .ant-table-tbody > tr > td {
     padding: 12px 15px;
     border: 1px solid #000;
-    cursor: default;
 }
 
-.reports-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-    border-left: 1.4px solid #1264d2;
-    border-right: 1.5px solid #1264d2;
-}
-
-.reports-table tbody tr:nth-of-type(even) {
+.reports-table .ant-table-tbody > tr:nth-child(even) {
     background-color: #f3f3f3;
 }
 
-.reports-table tbody tr:last-of-type {
+.reports-table .ant-table-tbody > tr:last-child > td {
     border-bottom: 2px solid #1264d2;
 }
 
-.reports-table tbody tr.active-row {
+.reports-table .ant-table-tbody > tr.active-row {
     font-weight: bold;
     color: #1264d2;
+}
+
+.reports-table .ant-table-wrapper {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
 }

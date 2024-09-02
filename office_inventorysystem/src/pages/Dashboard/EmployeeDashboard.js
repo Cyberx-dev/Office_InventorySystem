@@ -81,7 +81,7 @@ export default function EmployeeDashboard() {
             <Header />
             <Space className='Content'>
                 <EmployeeSideMenu />
-                <Space direction="vertical" style={{ padding: '20px', width: '100%' }}>
+                <Space direction="vertical" style={{ padding: '20px', width: '100%', marginTop: '-30px'}}>
                     <Row gutter={16}>
                         <Col span={12}>
                             <h1 className='pageTitle'>Inventory Overview</h1>

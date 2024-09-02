@@ -107,7 +107,7 @@ export default function AdminDashboard() {
             <Header />
             <Space className='Content'>
                 <SideMenu />
-                <Space direction="vertical" style={{ padding: '20px', width: '100%' }}>
+                <Space direction="vertical" style={{ padding: '20px', width: '100%' , marginTop: '-30px'}}>
                     <Row gutter={16}>
                         <Col span={12}>
                             <h1 className='pageTitle'>Inventory Overview</h1>

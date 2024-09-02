@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import SideMenu from '../../components/SideMenu';
-import { Space, Button, Modal } from 'antd';
+import { Space, Table, Input, Button, Modal } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { EditOutlined, UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons';
 import './UserManagement.css';
 import axios from 'axios';
@@ -11,6 +12,7 @@ export default function UserManagement() {
     const [isRemoveVisible, setIsRemoveVisible] = useState(false);
     const [isAddVisible, setIsAddVisible] = useState(false);
     const [employees, setEmployees] = useState([]);
+    const [filterUsers, setFilterUsers] = useState([]);
 
     useEffect(() => {
         fetchEmployees();
@@ -20,10 +22,21 @@ export default function UserManagement() {
         axios.get('http://localhost:5000/employees')
             .then(response => {
                 setEmployees(response.data);
+                setFilterUsers(response.data);
             })
             .catch(error => {
                 console.error('There was an error fetching the employees!', error);
             });
+    };
+
+    const handleSearch = (e) => {
+        const searchItem = e.target.value.toUpperCase();
+        const filtered = employees.filter(item =>
+            Object.values(item).some(val =>
+                String(val).toUpperCase().includes(searchItem)
+            )
+        );
+        setFilterUsers(filtered);
     };
 
     const showUpdateModal = () => setIsUpdateVisible(true);
@@ -202,33 +215,31 @@ export default function UserManagement() {
     );
 }
 
-const EmployeesTable = ({ employees }) => (
-    <table className="employees-table">
-        <thead>
-            <tr>
-                <th className="table-header" colSpan="5">Employees</th>
-            </tr>
-            <tr>
-                <th>#</th>
-                <th>Employee ID</th>
-                <th>Employee Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-            </tr>
-        </thead>
-        <tbody>
-            {employees.map((employee, index) => (
-                <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{employee.emplID}</td>
-                    <td>{employee.emplName}</td>
-                    <td><a href={`mailto:${employee.email}`}>{employee.email}</a></td>
-                    <td>{employee.contact}</td>
-                </tr>
-            ))}
-        </tbody>
-    </table>
-);
+const EmployeesTable = ({ employees }) => {
+    const columns = [
+        {title: '#', dataIndex: 'index', key: 'index', render: (text, record, index) => index + 1},
+        {title: 'Employee ID', dataIndex: 'emplID', key: 'emplID'},
+        {title: 'Employee Name', dataIndex: 'emplName', key: 'emplName'},
+        {title: 'Email', dataIndex: 'email', key: 'email'},
+        {title: 'Phone Number', dataIndex: 'contact', key: 'contact'}
+    ]
+
+    const dataSource = employees.map((employee, index) => ({
+        ...employee,
+        key: index,
+    }));
+
+    return (
+        <Table
+            className='employees-table'
+            columns={columns}
+            dataSource={dataSource}
+            bordered
+            pagination={{ pageSize: 10, position: ['bottomCenter'] }}
+        />
+    );
+};
+
 
 const AddUser = ({ visible, onCancel, onSubmit, title }) => (
     <Modal title={title} visible={visible} onCancel={onCancel} footer={null}>
