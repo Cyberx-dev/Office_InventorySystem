@@ -66,3 +66,21 @@ h1.pageTitle {
     border-radius: 10px;
     overflow: hidden;
 }
+
+.update-button {
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.add-button {
+    background-color: #52c41a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50px;
+}

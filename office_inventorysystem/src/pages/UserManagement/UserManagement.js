@@ -183,11 +183,23 @@ export default function UserManagement() {
                 <SideMenu />
                 <Space direction="vertical" style={{ width: '100%' }}>
                     <h1 className='pageTitle'>User Management System </h1>
-                    <Space>
-                        <Button icon={<EditOutlined style={{ fontSize: '18px', color: '#ffa500' }} />} onClick={showUpdateModal} />
-                        <Button icon={<UserAddOutlined style={{ fontSize: '18px', color: '#52c41a' }} />} onClick={showAddModal} />
-                        <Button icon={<UserDeleteOutlined style={{ fontSize: '18px', color: '#f5222d' }} />} onClick={showRemoveModal} />
+                    <Space direction='horizontal' style={{justifyContent: 'space-between', width: '100%' }}>
+                        
+                        <Input
+                            placeholder="Search Employees"
+                            onChange={handleSearch}
+                            style={{ width: 200 }}
+                            prefix={<SearchOutlined />}
+                        />
+
+                        <Space>
+                            <Button icon={<EditOutlined style={{ fontSize: '18px', color: '#ffa500' }} />} onClick={showUpdateModal} />
+                            <Button icon={<UserAddOutlined style={{ fontSize: '18px', color: '#52c41a' }} />} onClick={showAddModal} />
+                            <Button icon={<UserDeleteOutlined style={{ fontSize: '18px', color: '#f5222d' }} />} onClick={showRemoveModal} />
+                        </Space>
+
                     </Space>
+            
                     <UpdateUser
                         visible={isUpdateVisible}
                         onCancel={handleCancel}
@@ -207,7 +219,7 @@ export default function UserManagement() {
                         title="Remove Employee"
                     />
                     <div className="employees-container">
-                        <EmployeesTable employees={employees} />
+                        <EmployeesTable employees={filterUsers} />
                     </div>
                 </Space>
             </Space>

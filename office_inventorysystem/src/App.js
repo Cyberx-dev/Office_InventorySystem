@@ -6,7 +6,6 @@ import AdminDashboard from './pages/Dashboard/AdminDashboard';
 import UserManagement from './pages/UserManagement/UserManagement';
 import Inventory from './pages/Inventory/AdminInventory';
 import Reports from './pages/Report/AdminReports';
-import Database from './pages/Database/Database';
 import Settings from './pages/Settings/Settings';
 import EmployeeDashboard from './pages/Dashboard/EmployeeDashboard';
 import EmployeeInventory from './pages/Inventory/EmployeeInventory';
@@ -26,7 +25,6 @@ function App() {
           <Route path="/admin/usermanagement" element={<UserManagement />} />
           <Route path="/admin/inventory" element={<Inventory />} />
           <Route path="/admin/reports" element={<Reports />} />
-          <Route path="/admin/database" element={<Database />} />
           <Route path="/admin/settings" element={<Settings />} />
 
           {/* Employee */}

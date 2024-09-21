@@ -5,7 +5,6 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import { MdManageAccounts } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import { MdOutlineAddchart } from "react-icons/md";
-import { RiDatabase2Fill } from "react-icons/ri";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,7 +21,7 @@ export default function SideMenu() {
       <Button
         type="primary"
         onClick={toggleCollapsed}
-        style={{ marginBottom: 16 }}
+        style={{ marginBottom: 13 }}
       >
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
@@ -53,11 +52,6 @@ export default function SideMenu() {
             label: 'Reports',
             icon: <MdOutlineAddchart style={{fontSize: 15}} />,
             key: '/admin/reports'
-          },
-          {
-            label: 'Database',
-            icon: <RiDatabase2Fill />,
-            key: '/admin/database'
           },
           {
             label: 'Settings',
